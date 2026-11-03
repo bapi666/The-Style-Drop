@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,97 +7,102 @@
   <meta name="description" content="Shop curated Men & Women fashion, tech, and daily essentials on The Style Drop." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <style>
-    :root {
-      --bg: #09090b;
-      --card-bg: #141418;
-      --border: #26262e;
-      --text: #f8fafc;
-      --muted: #9ca3af;
+    /* EXACT SOFT BLUSH PINK THEME (MATCHES YOUR LOGO BACKGROUND SEAMLESSLY) */
+    :root, [data-theme="light"] {
+      --bg: #f6e3e4;
+      --card-bg: #fdfaf6;
+      --border: #ead2d4;
+      --text: #18181b;
+      --muted: #6b5e62;
       --pink: #f01267;
-      --logo-bg: #f6e3e4;
-      --amber: #f7a246;
-      --coral: #ff6e5b;
+      --pill-bg: #f9f3eb;
+      --badge-bg: #f6e3e4;
+      --badge-text: #18181b;
+      --social-bg: #7c686b;
+      --shadow: 0 6px 18px rgba(124, 104, 107, 0.12);
       --sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    /* DARK MODE THEME */
+    [data-theme="dark"] {
+      --bg: #0f0c0e;
+      --card-bg: #1a1518;
+      --border: #33272c;
+      --text: #f8fafc;
+      --muted: #a39599;
+      --pink: #f01267;
+      --pill-bg: #241d21;
+      --badge-bg: rgba(0, 0, 0, 0.8);
+      --badge-text: #f7a246;
+      --social-bg: #2d2428;
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--sans); }
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
 
-    /* HEADER & CUSTOM LOGO BANNER */
+    /* TOP HEADER WITH SEAMLESS LOGO & DARK MODE BUTTON */
     header {
       max-width: 960px;
       width: 100%;
       margin: 0 auto;
-      padding: 24px 16px 18px;
+      padding: 14px 16px 18px;
       text-align: center;
+      position: relative;
     }
 
-    .logo-banner {
-      background: var(--logo-bg);
-      max-width: 440px;
-      margin: 0 auto 18px;
-      padding: 18px 22px;
-      border-radius: 22px;
+    .top-bar {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 12px 32px rgba(240, 18, 103, 0.16);
-      border: 2px solid rgba(255, 255, 255, 0.4);
+      justify-content: flex-end;
+      margin-bottom: -10px;
+      position: relative;
+      z-index: 5;
     }
-    .logo-svg {
-      width: 100%;
-      max-width: 340px;
-      height: auto;
-      display: block;
-    }
-
-    .subtitle {
-      color: var(--muted);
-      font-size: 0.88rem;
-      margin-bottom: 18px;
-    }
-
-    /* 7 SOCIAL MEDIA LINKS */
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 22px;
-      flex-wrap: wrap;
-    }
-    .social-btn {
+    .theme-toggle {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: var(--card-bg);
+      background: var(--pill-bg);
       color: var(--text);
       border: 1px solid var(--border);
-      padding: 7px 13px;
-      border-radius: 30px;
-      font-size: 0.76rem;
-      font-weight: 600;
-      text-decoration: none;
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: var(--shadow);
       transition: 0.2s;
     }
-    .social-btn:hover { transform: translateY(-2px); border-color: var(--pink); }
-    .social-btn svg { width: 14px; height: 14px; fill: currentColor; }
-    .insta:hover { color: #E1306C; border-color: #E1306C; }
-    .x-tw:hover { color: #ffffff; border-color: #ffffff; background: #000; }
-    .yt:hover { color: #FF0000; border-color: #FF0000; }
-    .fb:hover { color: #1877F2; border-color: #1877F2; }
-    .pin:hover { color: #E60023; border-color: #E60023; }
-    .reddit:hover { color: #FF4500; border-color: #FF4500; }
-    .discord:hover { color: #5865F2; border-color: #5865F2; }
+    .theme-toggle:hover { border-color: var(--pink); }
 
-    /* SEARCH BAR & CATEGORY FILTERS */
+    /* SEAMLESS LOGO CONTAINER (NO BOX BORDER) */
+    .logo-container {
+      max-width: 230px;
+      margin: 0 auto 10px;
+    }
+    .logo-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 16px;
+    }
+
+    /* SMART SEARCH BAR & CATEGORY FILTERS */
     .controls {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
       max-width: 620px;
       margin: 0 auto;
     }
@@ -107,14 +112,19 @@
     }
     .search-box {
       width: 100%;
-      padding: 14px 20px;
+      padding: 14px 22px;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: var(--card-bg);
-      color: var(--text);
+      background: #ffffff;
+      color: #18181b;
       font-size: 0.92rem;
       outline: none;
+      box-shadow: var(--shadow);
       transition: 0.2s;
+    }
+    [data-theme="dark"] .search-box {
+      background: var(--card-bg);
+      color: var(--text);
     }
     .search-box:focus {
       border-color: var(--pink);
@@ -130,130 +140,117 @@
       flex-wrap: wrap;
     }
     .filter-btn {
-      background: var(--card-bg);
-      color: var(--muted);
+      background: var(--pill-bg);
+      color: var(--text);
       border: 1px solid var(--border);
       padding: 8px 18px;
       border-radius: 999px;
       font-size: 0.82rem;
       font-weight: 600;
       cursor: pointer;
+      box-shadow: var(--shadow);
       transition: 0.2s;
     }
     .filter-btn.active, .filter-btn:hover {
       background: var(--pink);
-      color: #fff;
+      color: #ffffff;
       border-color: var(--pink);
       font-weight: 700;
     }
 
-    /* PRODUCT GRID (EXACTLY 6 PRODUCTS PER PAGE) */
+    /* PRODUCT GRID (6 PRODUCTS PER PAGE) */
     main {
       max-width: 960px;
       width: 100%;
-      margin: 18px auto 0;
-      padding: 0 16px;
+      margin: 14px auto 0;
+      padding: 0 14px;
       flex-grow: 1;
     }
     .grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
+      gap: 12px;
     }
     @media (min-width: 768px) {
-      .grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+      .grid { grid-template-columns: repeat(3, 1fr); gap: 18px; }
     }
 
-    /* ENTIRE CARD IS A DIRECT AFFILIATE LINK */
     .card {
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 18px;
-      overflow: hidden;
+      padding: 8px;
       display: flex;
       flex-direction: column;
       position: relative;
       text-decoration: none;
       color: inherit;
-      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, border-color 0.2s;
       cursor: pointer;
     }
     .card:hover {
       transform: translateY(-4px);
       border-color: var(--pink);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     }
 
     .badge {
       position: absolute;
-      top: 10px;
-      left: 10px;
-      background: rgba(0, 0, 0, 0.82);
-      backdrop-filter: blur(4px);
-      color: var(--amber);
+      top: 14px;
+      left: 14px;
+      background: var(--badge-bg);
+      color: var(--badge-text);
       padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 0.72rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
       font-weight: 800;
       z-index: 2;
-      border: 1px solid rgba(247, 162, 70, 0.3);
-    }
-    .cat-tag {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: rgba(240, 18, 103, 0.88);
-      color: #fff;
-      padding: 3px 9px;
-      border-radius: 20px;
-      font-size: 0.65rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      z-index: 2;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
     }
 
     .card-img {
       width: 100%;
-      aspect-ratio: 4 / 4.6;
+      aspect-ratio: 1 / 1.05;
       object-fit: cover;
-      background: #1c1c22;
+      border-radius: 12px;
+      background: #e5e7eb;
     }
     .card-body {
-      padding: 14px;
+      padding: 10px 4px 4px;
       display: flex;
       flex-direction: column;
+      align-items: center;
+      text-align: center;
       flex-grow: 1;
     }
     .card-title {
-      font-size: 0.94rem;
+      font-size: 0.9rem;
       font-weight: 700;
-      margin-bottom: 5px;
-      line-height: 1.35;
+      margin-bottom: 4px;
+      line-height: 1.3;
       color: var(--text);
     }
     .card-desc {
       color: var(--muted);
-      font-size: 0.77rem;
-      line-height: 1.45;
-      margin-bottom: 14px;
+      font-size: 0.76rem;
+      line-height: 1.4;
+      margin-bottom: 10px;
       flex-grow: 1;
     }
     .cta-btn {
       display: block;
       width: 100%;
       text-align: center;
-      background: var(--amber);
-      color: #000;
-      font-weight: 800;
-      font-size: 0.82rem;
-      padding: 10px;
-      border-radius: 999px;
-      transition: background 0.2s;
-    }
-    .card:hover .cta-btn {
       background: var(--pink);
-      color: #fff;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 9px;
+      border-radius: 999px;
+      box-shadow: 0 4px 10px rgba(240, 18, 103, 0.28);
+      transition: transform 0.2s, opacity 0.2s;
     }
+    .card:hover .cta-btn { opacity: 0.92; }
 
     .status {
       grid-column: 1 / -1;
@@ -263,153 +260,107 @@
       font-size: 0.92rem;
     }
 
-    /* PAGINATION (1, 2, 3, 4, 5, 6...) */
+    /* PAGINATION (< Prev 1 2 3 Next >) */
     .pagination {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 8px;
-      margin: 32px auto 16px;
+      margin: 26px auto 10px;
       flex-wrap: wrap;
     }
     .page-btn {
-      min-width: 40px;
-      height: 40px;
-      padding: 0 13px;
-      border-radius: 12px;
+      min-width: 38px;
+      height: 38px;
+      padding: 0 14px;
+      border-radius: 10px;
       border: 1px solid var(--border);
-      background: var(--card-bg);
+      background: var(--pill-bg);
       color: var(--text);
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       font-weight: 700;
       cursor: pointer;
+      box-shadow: var(--shadow);
       transition: 0.2s;
       display: inline-flex;
       align-items: center;
       justify-content: center;
     }
-    .page-btn:hover:not(:disabled) {
-      border-color: var(--pink);
-      color: var(--pink);
-    }
     .page-btn.active {
       background: var(--pink);
-      color: #fff;
+      color: #ffffff;
       border-color: var(--pink);
     }
     .page-btn:disabled {
-      opacity: 0.35;
+      opacity: 0.4;
       cursor: not-allowed;
     }
 
-    /* FOOTER WITH DISCLOSURE AT THE VERY BOTTOM */
+    /* FOOTER: CIRCULAR SOCIAL ICONS & DISCLOSURE AT THE BOTTOM */
     footer {
-      margin-top: 44px;
-      border-top: 1px solid var(--border);
-      background: #0c0c0f;
-      padding: 28px 16px 34px;
+      margin-top: 24px;
+      padding: 20px 16px 32px;
       text-align: center;
     }
-    .footer-brand {
-      font-weight: 800;
-      font-size: 0.9rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text);
-      margin-bottom: 10px;
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
     }
+    .social-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--social-bg);
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: transform 0.2s, background 0.2s;
+      box-shadow: var(--shadow);
+    }
+    .social-btn:hover {
+      transform: translateY(-2px);
+      background: var(--pink);
+    }
+    .social-btn svg { width: 17px; height: 17px; fill: currentColor; }
+
     .disclosure {
       color: var(--muted);
       font-size: 0.74rem;
-      max-width: 640px;
+      max-width: 600px;
       margin: 0 auto;
-      line-height: 1.55;
+      line-height: 1.5;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <!-- YOUR EXACT UPLOADED LOGO ("Online Shop - The Style Drop") -->
-    <div class="logo-banner">
-      <svg class="logo-svg" viewBox="0 0 520 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Online Shop The Style Drop">
-        <!-- Pink Shopping Bag (Tilted Left) -->
-        <g transform="translate(32, 18) rotate(-9, 75, 80)">
-          <!-- Bag Handle -->
-          <path d="M 48 42 C 48 5, 102 5, 102 42" fill="none" stroke="#f01267" stroke-width="11" stroke-linecap="round" />
-          <!-- Bag Body -->
-          <path d="M 22 40 L 128 40 L 142 152 L 8 152 Z" fill="#f01267" stroke="#f01267" stroke-width="6" stroke-linejoin="round" />
-          <!-- Bag Holes -->
-          <circle cx="48" cy="55" r="4.5" fill="#ffffff" />
-          <circle cx="102" cy="55" r="4.5" fill="#ffffff" />
-        </g>
-
-        <!-- White Shopping Bag (Tilted Right in Front) -->
-        <g transform="translate(68, 66) rotate(14, 55, 55)">
-          <!-- White Handle -->
-          <path d="M 32 32 C 32 4, 76 4, 76 32" fill="none" stroke="#ffffff" stroke-width="8.5" stroke-linecap="round" />
-          <!-- White Body -->
-          <path d="M 14 30 L 94 30 L 104 108 L 4 108 Z" fill="#ffffff" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" />
-          <!-- Pink Holes -->
-          <circle cx="33" cy="42" r="3.5" fill="#f01267" />
-          <circle cx="75" cy="42" r="3.5" fill="#f01267" />
-        </g>
-
-        <!-- Cutout Mask Effect for Text Overlap -->
-        <path d="M 115 120 L 200 120 L 200 175 L 115 175 Z" fill="#f6e3e4" opacity="0.85" />
-
-        <!-- "Online Shop" Text -->
-        <text x="235" y="108" font-family="'Plus Jakarta Sans', sans-serif" font-size="21" font-weight="500" fill="#000000" letter-spacing="3.5">Online Shop</text>
-
-        <!-- "The Style Drop" Brush Text -->
-        <text x="140" y="158" font-family="'Caveat Brush', cursive, sans-serif" font-size="64" font-weight="700" fill="#000000" letter-spacing="1">The Style Drop</text>
-      </svg>
+    <!-- 1. DARK / LIGHT MODE TOGGLE IN TOP RIGHT -->
+    <div class="top-bar">
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle Theme">
+        🌙 Dark Mode
+      </button>
     </div>
 
-    <p class="subtitle">Click any product to shop directly • Search by #number or item name</p>
-
-    <!-- 7 OFFICIAL SOCIAL LINKS -->
-    <div class="social-links">
-      <a href="https://www.instagram.com/thestyledrop7" target="_blank" rel="noopener" class="social-btn insta">
-        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-        Instagram
-      </a>
-      <a href="https://x.com/thestyledrop_" target="_blank" rel="noopener" class="social-btn x-tw">
-        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        X
-      </a>
-      <a href="https://www.youtube.com/@thestyledrops" target="_blank" rel="noopener" class="social-btn yt">
-        <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        YouTube
-      </a>
-      <a href="https://www.facebook.com/thestyledrops" target="_blank" rel="noopener" class="social-btn fb">
-        <svg viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg>
-        Facebook
-      </a>
-      <a href="https://pin.it/76765cmU8" target="_blank" rel="noopener" class="social-btn pin">
-        <svg viewBox="0 0 24 24"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></svg>
-        Pinterest
-      </a>
-      <a href="https://www.reddit.com/user/thestyledrop" target="_blank" rel="noopener" class="social-btn reddit">
-        <svg viewBox="0 0 24 24"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
-        Reddit
-      </a>
-      <a href="https://discord.gg/zGXSbrWTZ" target="_blank" rel="noopener" class="social-btn discord">
-        <svg viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
-        Discord
-      </a>
+    <!-- 2. YOUR UPLOADED LOGO.PNG -->
+    <div class="logo-container">
+      <img src="logo.png" alt="Online Shop - The Style Drop" class="logo-img" />
     </div>
 
-    <!-- SEARCH & MEN / WOMEN FASHION FILTERS -->
+    <!-- 3. SEARCH BAR & 4. MEN / WOMEN FILTERS -->
     <div class="controls">
       <div class="search-wrap">
-        <input type="text" id="searchInput" class="search-box" placeholder="Search #number or item (Pant, T-shirt, Jacket...)" />
+        <input type="text" id="searchInput" class="search-box" placeholder="🔍 Search items, styles, #number (Pant, T-shirt, Jacket...)" />
       </div>
       <div class="filters" id="filterContainer">
         <button class="filter-btn active" data-category="all">All</button>
         <button class="filter-btn" data-category="men">Men</button>
         <button class="filter-btn" data-category="women">Women</button>
-        <button class="filter-btn" data-category="fashion">All Fashion</button>
         <button class="filter-btn" data-category="tech">Tech & Desk</button>
         <button class="filter-btn" data-category="essentials">Essentials</button>
       </div>
@@ -417,27 +368,50 @@
   </header>
 
   <main id="shopTop">
-    <!-- 6 PRODUCTS PER PAGE GRID -->
+    <!-- 5. 6 PRODUCTS PER PAGE GRID -->
     <div class="grid" id="productGrid">
       <p class="status">Loading products...</p>
     </div>
 
-    <!-- PAGE NUMBERS (1, 2, 3...) -->
+    <!-- 6. PAGINATION (< Prev 1 2 3 Next >) -->
     <div class="pagination" id="paginationContainer"></div>
   </main>
 
-  <!-- FOOTER WITH AFFILIATE DISCLOSURE AT THE BOTTOM -->
+  <!-- 7. ROUND SOCIAL ICONS & 8. DISCLOSURE AT THE VERY BOTTOM -->
   <footer>
-    <div class="footer-brand">The Style Drop • Online Shop</div>
+    <div class="social-links">
+      <a href="https://www.instagram.com/thestyledrop7" target="_blank" rel="noopener" class="social-btn" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </a>
+      <a href="https://x.com/thestyledrop_" target="_blank" rel="noopener" class="social-btn" aria-label="X">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://www.youtube.com/@thestyledrops" target="_blank" rel="noopener" class="social-btn" aria-label="YouTube">
+        <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+      <a href="https://www.facebook.com/thestyledrops" target="_blank" rel="noopener" class="social-btn" aria-label="Facebook">
+        <svg viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg>
+      </a>
+      <a href="https://pin.it/76765cmU8" target="_blank" rel="noopener" class="social-btn" aria-label="Pinterest">
+        <svg viewBox="0 0 24 24"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></svg>
+      </a>
+      <a href="https://www.reddit.com/user/thestyledrop" target="_blank" rel="noopener" class="social-btn" aria-label="Reddit">
+        <svg viewBox="0 0 24 24"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
+      </a>
+      <a href="https://discord.gg/zGXSbrWTZ" target="_blank" rel="noopener" class="social-btn" aria-label="Discord">
+        <svg viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
+      </a>
+    </div>
+
     <p class="disclosure">
-      Disclosure: As an Amazon Associate and affiliate partner for various e-commerce stores, I earn from qualifying purchases at no extra cost to you.
+      We may earn a commission for purchases made through our links.
     </p>
   </footer>
 
   <script>
     const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/" + "15xy8uLalVPQw07WEUPB3tO2oWqydjk7rKrvogjTSkx8" + "/export?format=csv";
 
-    const ITEMS_PER_PAGE = 6; // Strictly 6 products per page
+    const ITEMS_PER_PAGE = 6;
     let products = [];
     let activeCategory = "all";
     let currentPage = 1;
@@ -446,8 +420,23 @@
     const paginationContainer = document.getElementById("paginationContainer");
     const searchInput = document.getElementById("searchInput");
     const filterBtns = document.querySelectorAll(".filter-btn");
+    const themeToggle = document.getElementById("themeToggle");
+    const htmlEl = document.documentElement;
 
-    // Normalize text so "tshirt" matches "T-Shirt" or "t shirt"
+    const savedTheme = localStorage.getItem("tsd_theme") || "light";
+    setTheme(savedTheme);
+
+    themeToggle.addEventListener("click", () => {
+      const current = htmlEl.getAttribute("data-theme");
+      setTheme(current === "light" ? "dark" : "light");
+    });
+
+    function setTheme(theme) {
+      htmlEl.setAttribute("data-theme", theme);
+      localStorage.setItem("tsd_theme", theme);
+      themeToggle.innerHTML = theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode";
+    }
+
     function normalizeText(str) {
       return (str || "").toLowerCase().replace(/[-\s]+/g, "");
     }
@@ -477,7 +466,6 @@
         const desc = (p.desc || "").toLowerCase();
         const id = (p.id || "").toLowerCase();
 
-        // Category Matching (Men, Women, Fashion, Tech, Essentials)
         let matchesCat = false;
         if (activeCategory === "all") {
           matchesCat = true;
@@ -485,13 +473,10 @@
           matchesCat = cat === "men" || cat === "men fashion" || cat === "mens";
         } else if (activeCategory === "women") {
           matchesCat = cat === "women" || cat === "women fashion" || cat === "womens";
-        } else if (activeCategory === "fashion") {
-          matchesCat = cat.includes("fashion") || cat === "men" || cat === "women";
         } else {
           matchesCat = cat.includes(activeCategory);
         }
 
-        // Smart Search Matching (#ID, Title, Description, Category, T-shirt/Pant/Jacket)
         if (!rawQuery) return matchesCat;
 
         const matchesRaw =
@@ -523,78 +508,4 @@
       if (currentPage > totalPages) currentPage = 1;
 
       const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-      const pageItems = filtered.slice(startIndex, startIndex + ITEMS_PER_PAGE);
-
-      // Render 6 Direct-Click Cards
-      pageItems.forEach(p => {
-        const cleanLink = (p.link || "#").trim();
-        const cleanCat = (p.category || "").trim();
-        grid.innerHTML += `
-          <a href="${cleanLink}" target="_blank" rel="sponsored nofollow noopener" class="card">
-            <span class="badge">${p.id || ""}</span>
-            ${cleanCat ? `<span class="cat-tag">${cleanCat}</span>` : ""}
-            <img src="${p.image || ""}" alt="${p.title}" class="card-img" loading="lazy" decoding="async" />
-            <div class="card-body">
-              <h2 class="card-title">${p.title}</h2>
-              <p class="card-desc">${p.desc || ""}</p>
-              <span class="cta-btn">Shop Now →</span>
-            </div>
-          </a>
-        `;
-      });
-
-      renderPagination(totalPages);
-    }
-
-    function renderPagination(totalPages) {
-      if (totalPages <= 1) return; // Only 1 page -> no buttons needed, or show Page 1
-
-      // Prev Button
-      const prevBtn = document.createElement("button");
-      prevBtn.className = "page-btn";
-      prevBtn.innerText = "‹ Prev";
-      prevBtn.disabled = currentPage === 1;
-      prevBtn.onclick = () => goToPage(currentPage - 1);
-      paginationContainer.appendChild(prevBtn);
-
-      // Page Numbers (1, 2, 3, 4...)
-      for (let i = 1; i <= totalPages; i++) {
-        const pageBtn = document.createElement("button");
-        pageBtn.className = "page-btn" + (i === currentPage ? " active" : "");
-        pageBtn.innerText = i;
-        pageBtn.onclick = () => goToPage(i);
-        paginationContainer.appendChild(pageBtn);
-      }
-
-      // Next Button
-      const nextBtn = document.createElement("button");
-      nextBtn.className = "page-btn";
-      nextBtn.innerText = "Next ›";
-      nextBtn.disabled = currentPage === totalPages;
-      nextBtn.onclick = () => goToPage(currentPage + 1);
-      paginationContainer.appendChild(nextBtn);
-    }
-
-    function goToPage(pageNum) {
-      currentPage = pageNum;
-      renderProducts();
-      document.getElementById("shopTop").scrollIntoView({ behavior: "smooth" });
-    }
-
-    searchInput.addEventListener("input", () => {
-      currentPage = 1;
-      renderProducts();
-    });
-
-    filterBtns.forEach(btn => {
-      btn.addEventListener("click", () => {
-        filterBtns.forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        activeCategory = btn.dataset.category;
-        currentPage = 1;
-        renderProducts();
-      });
-    });
-  </script>
-</body>
-</html>
+      const pageItem
