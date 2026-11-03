@@ -1,199 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- SEO Meta Tags -->
-    <title>The Style Drop | Latest Fashion</title>
-    <meta name="description" content="Discover the latest fashion drops and styles at The Style Drop.">
-    
-    <!-- Social Media Preview -->
-    <meta property="og:title" content="The Style Drop">
-    <meta property="og:description" content="Discover the latest fashion drops.">
-    <meta property="og:type" content="website">
-    <!-- (Optional) Add a link to a nice image here if you have one -->
-    
-    <!-- Your existing styles go here -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Style Drop | Shop At Your Own Pace</title>
-  <meta name="description" content="It's all here. Shop curated fashion, tech, and daily essentials on The Style Drop." />
+  <title>The Style Drop | Online Shop</title>
+  <meta name="description" content="Shop curated Men & Women fashion, tech, and daily essentials on The Style Drop." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <style>
     :root {
-      --bg: #050505;
-      --card-bg: #111113;
-      --border: #242428;
-      --text: #ffffff;
-      --muted: #b0b0b8;
+      --bg: #09090b;
+      --card-bg: #141418;
+      --border: #26262e;
+      --text: #f8fafc;
+      --muted: #9ca3af;
+      --pink: #f01267;
+      --logo-bg: #f6e3e4;
       --amber: #f7a246;
       --coral: #ff6e5b;
-      --lilac: #f3a6ff;
-      --serif: 'Cormorant Garamond', Georgia, serif;
       --sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--sans); }
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: var(--sans); overflow-x: hidden; }
+    body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
 
-    .disclosure {
-      background: #111;
-      color: var(--muted);
-      font-size: 0.7rem;
-      text-align: center;
-      padding: 8px 14px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    /* 1. HERO SECTION (Canva Top Section) */
-    .hero {
-      max-width: 1050px;
-      margin: 0 auto;
-      padding: 36px 20px 44px;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 28px;
-      align-items: center;
-      text-align: center;
-    }
-    @media (min-width: 768px) {
-      .hero { grid-template-columns: 1fr 1fr; text-align: left; padding: 56px 24px; }
-    }
-    .brand-logo {
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: #fff;
-      margin-bottom: 18px;
-      display: inline-block;
-      border-bottom: 1px solid var(--amber);
-      padding-bottom: 4px;
-    }
-    .eyebrow {
-      font-size: 0.72rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
-    .hero h1 {
-      font-family: var(--serif);
-      font-size: clamp(2.5rem, 6vw, 4rem);
-      font-weight: 600;
-      line-height: 1.05;
-      margin-bottom: 14px;
-    }
-    .hero p {
-      color: var(--muted);
-      font-size: 0.9rem;
-      max-width: 340px;
-      margin: 0 auto 22px;
-      line-height: 1.5;
-    }
-    @media (min-width: 768px) {
-      .hero p { margin: 0 0 24px; }
-    }
-    .pill-btn {
-      display: inline-block;
-      background: var(--amber);
-      color: #000;
-      font-weight: 700;
-      font-size: 0.8rem;
-      padding: 11px 28px;
-      border-radius: 999px;
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      transition: transform 0.2s, opacity 0.2s;
-    }
-    .pill-btn:hover { transform: translateY(-2px); opacity: 0.92; }
-    .pill-btn.coral { background: var(--coral); color: #000; }
-
-    /* Butterfly Mask Image */
-    .butterfly-wrap {
-      position: relative;
-      max-width: 340px;
-      margin: 0 auto;
-    }
-    .butterfly-img {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      border-radius: 48% 52% 44% 56% / 58% 42% 58% 42%;
-      border: 2px solid rgba(247, 162, 70, 0.35);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-    }
-    .sparkle {
-      position: absolute;
-      bottom: 8px;
-      right: 6px;
-      width: 56px;
-      height: 56px;
-      fill: var(--amber);
-    }
-
-    /* 2. SHOPPING SIMPLIFIED BANNER */
-    .sky-banner {
-      background: linear-gradient(135deg, rgba(16,45,78,0.85), rgba(68,125,172,0.75)),
-                  url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
-      padding: 48px 20px;
-      margin: 10px 0 36px;
-    }
-    .sky-inner {
+    /* HEADER & CUSTOM LOGO BANNER */
+    header {
       max-width: 960px;
+      width: 100%;
       margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      justify-content: space-between;
-    }
-    @media (min-width: 768px) {
-      .sky-inner { flex-direction: row; align-items: flex-end; }
-    }
-    .sky-banner h2 {
-      font-family: var(--serif);
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 600;
-      line-height: 1.1;
-    }
-    .sky-box {
-      max-width: 360px;
-      font-size: 0.82rem;
-      line-height: 1.55;
-      color: #f0f6ff;
-    }
-    .sky-box p { margin-bottom: 14px; }
-
-    /* 3. MAIN SHOP & SOCIALS (Your Google Sheet Products) */
-    .shop-section {
-      max-width: 1000px;
-      margin: 0 auto 48px;
-      padding: 0 16px;
-    }
-    .section-head {
+      padding: 24px 16px 18px;
       text-align: center;
-      margin-bottom: 20px;
-    }
-    .section-head h2 {
-      font-family: var(--serif);
-      font-size: 2.2rem;
-      margin-bottom: 6px;
-    }
-    .section-head p {
-      color: var(--muted);
-      font-size: 0.85rem;
     }
 
-    /* Social Media Buttons */
-    .social-links { display: flex; justify-content: center; gap: 8px; margin: 18px 0 24px; flex-wrap: wrap; }
-    .social-btn { display: inline-flex; align-items: center; gap: 6px; background: var(--card-bg); color: var(--text); border: 1px solid var(--border); padding: 7px 13px; border-radius: 30px; font-size: 0.76rem; font-weight: 600; text-decoration: none; transition: 0.2s; }
-    .social-btn:hover { transform: translateY(-2px); border-color: var(--amber); }
+    .logo-banner {
+      background: var(--logo-bg);
+      max-width: 440px;
+      margin: 0 auto 18px;
+      padding: 18px 22px;
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 32px rgba(240, 18, 103, 0.16);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+    }
+    .logo-svg {
+      width: 100%;
+      max-width: 340px;
+      height: auto;
+      display: block;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 18px;
+    }
+
+    /* 7 SOCIAL MEDIA LINKS */
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 7px 13px;
+      border-radius: 30px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+    .social-btn:hover { transform: translateY(-2px); border-color: var(--pink); }
     .social-btn svg { width: 14px; height: 14px; fill: currentColor; }
     .insta:hover { color: #E1306C; border-color: #E1306C; }
     .x-tw:hover { color: #ffffff; border-color: #ffffff; background: #000; }
@@ -203,170 +93,282 @@
     .reddit:hover { color: #FF4500; border-color: #FF4500; }
     .discord:hover { color: #5865F2; border-color: #5865F2; }
 
-    /* Search & Category Filters */
-    .controls { display: flex; flex-direction: column; gap: 12px; max-width: 580px; margin: 0 auto 24px; }
-    .search-box { width: 100%; padding: 13px 18px; border-radius: 999px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text); font-size: 0.9rem; outline: none; }
-    .search-box:focus { border-color: var(--amber); }
-    .filters { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; justify-content: center; flex-wrap: wrap; }
-    .filter-btn { background: var(--card-bg); color: var(--muted); border: 1px solid var(--border); padding: 7px 16px; border-radius: 999px; font-size: 0.8rem; cursor: pointer; transition: 0.2s; }
-    .filter-btn.active, .filter-btn:hover { background: var(--amber); color: #000; border-color: var(--amber); font-weight: 700; }
-
-    /* Dynamic Product Grid */
-    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-    @media (min-width: 768px) { .grid { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
-    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; position: relative; transition: transform 0.2s; }
-    .card:hover { transform: translateY(-4px); border-color: #383842; }
-    .badge { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.8); color: var(--amber); padding: 4px 9px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; }
-    .card-img { width: 100%; aspect-ratio: 4 / 4.5; object-fit: cover; background: #18181b; }
-    .card-body { padding: 14px; display: flex; flex-direction: column; flex-grow: 1; }
-    .card-title { font-size: 0.92rem; font-weight: 700; margin-bottom: 5px; line-height: 1.3; }
-    .card-desc { color: var(--muted); font-size: 0.76rem; line-height: 1.4; margin-bottom: 14px; flex-grow: 1; }
-    .cta-btn { display: block; width: 100%; text-align: center; background: var(--amber); color: #000; font-weight: 700; font-size: 0.8rem; padding: 10px; border-radius: 999px; text-decoration: none; transition: 0.2s; }
-    .cta-btn:hover { background: var(--coral); }
-    .status { grid-column: 1 / -1; text-align: center; color: var(--muted); padding: 40px 0; }
-
-    /* 4. LILAC & ARCHES SECTION (From Canva Middle) */
-    .editorial-split {
-      max-width: 960px;
-      margin: 56px auto;
-      padding: 0 16px;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 24px;
-      align-items: center;
+    /* SEARCH BAR & CATEGORY FILTERS */
+    .controls {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 620px;
+      margin: 0 auto;
     }
-    @media (min-width: 768px) {
-      .editorial-split { grid-template-columns: 1.1fr 0.9fr; }
-    }
-    .lilac-card {
-      background: var(--lilac);
-      color: #000;
-      padding: 28px 24px;
-      border-radius: 18px;
-    }
-    .lilac-card img {
+    .search-wrap {
+      position: relative;
       width: 100%;
-      height: 220px;
-      object-fit: cover;
-      border-radius: 90px 90px 16px 16px;
-      margin-bottom: 16px;
     }
-    .lilac-card h3 { font-family: var(--serif); font-size: 1.6rem; margin-bottom: 6px; }
-    .lilac-card p { font-size: 0.8rem; line-height: 1.5; color: #222; }
+    .search-box {
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text);
+      font-size: 0.92rem;
+      outline: none;
+      transition: 0.2s;
+    }
+    .search-box:focus {
+      border-color: var(--pink);
+      box-shadow: 0 0 0 3px rgba(240, 18, 103, 0.2);
+    }
 
-    .arch-stack {
+    .filters {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      background: var(--card-bg);
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--pink);
+      color: #fff;
+      border-color: var(--pink);
+      font-weight: 700;
+    }
+
+    /* PRODUCT GRID (EXACTLY 6 PRODUCTS PER PAGE) */
+    main {
+      max-width: 960px;
+      width: 100%;
+      margin: 18px auto 0;
+      padding: 0 16px;
+      flex-grow: 1;
+    }
+    .grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, 1fr);
       gap: 14px;
     }
-    .arch-img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 999px 999px 20px 20px;
-      border: 1px solid var(--border);
-    }
-    .arch-img.pill-shape {
-      border-radius: 999px;
+    @media (min-width: 768px) {
+      .grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
     }
 
-    /* 5. FEATURED DROPS / BLOG CARDS (Orange & Coral Overlap) */
-    .featured-stories {
-      max-width: 960px;
-      margin: 0 auto 56px;
-      padding: 0 16px;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 24px;
-    }
-    @media (min-width: 768px) {
-      .featured-stories { grid-template-columns: 1fr 1fr; }
-    }
-    .story-card { position: relative; padding-bottom: 28px; }
-    .story-card img {
-      width: 100%;
-      height: 240px;
-      object-fit: cover;
+    /* ENTIRE CARD IS A DIRECT AFFILIATE LINK */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
       border-radius: 18px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+      cursor: pointer;
     }
-    .story-caption {
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--pink);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .badge {
       position: absolute;
-      bottom: 0;
-      left: 16px;
-      right: 16px;
+      top: 10px;
+      left: 10px;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(4px);
+      color: var(--amber);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      z-index: 2;
+      border: 1px solid rgba(247, 162, 70, 0.3);
+    }
+    .cat-tag {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(240, 18, 103, 0.88);
+      color: #fff;
+      padding: 3px 9px;
+      border-radius: 20px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+
+    .card-img {
+      width: 100%;
+      aspect-ratio: 4 / 4.6;
+      object-fit: cover;
+      background: #1c1c22;
+    }
+    .card-body {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .card-title {
+      font-size: 0.94rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+      line-height: 1.35;
+      color: var(--text);
+    }
+    .card-desc {
+      color: var(--muted);
+      font-size: 0.77rem;
+      line-height: 1.45;
+      margin-bottom: 14px;
+      flex-grow: 1;
+    }
+    .cta-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
       background: var(--amber);
       color: #000;
-      padding: 14px 18px;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 0.85rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.82rem;
+      padding: 10px;
+      border-radius: 999px;
+      transition: background 0.2s;
     }
-    .story-caption.coral { background: var(--coral); }
+    .card:hover .cta-btn {
+      background: var(--pink);
+      color: #fff;
+    }
 
-    /* 6. FOOTER BANNER (Sign up / Follow Deals & Drops) */
-    .footer-banner {
-      background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.35)),
-                  url('https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+    .status {
+      grid-column: 1 / -1;
       text-align: center;
-      padding: 64px 20px 44px;
+      color: var(--muted);
+      padding: 48px 16px;
+      font-size: 0.92rem;
     }
-    .footer-banner h2 {
-      font-family: var(--serif);
-      font-size: clamp(2rem, 5vw, 3rem);
+
+    /* PAGINATION (1, 2, 3, 4, 5, 6...) */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 32px auto 16px;
+      flex-wrap: wrap;
+    }
+    .page-btn {
+      min-width: 40px;
+      height: 40px;
+      padding: 0 13px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text);
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .page-btn:hover:not(:disabled) {
+      border-color: var(--pink);
+      color: var(--pink);
+    }
+    .page-btn.active {
+      background: var(--pink);
+      color: #fff;
+      border-color: var(--pink);
+    }
+    .page-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    /* FOOTER WITH DISCLOSURE AT THE VERY BOTTOM */
+    footer {
+      margin-top: 44px;
+      border-top: 1px solid var(--border);
+      background: #0c0c0f;
+      padding: 28px 16px 34px;
+      text-align: center;
+    }
+    .footer-brand {
+      font-weight: 800;
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
       margin-bottom: 10px;
     }
-    .footer-banner p {
-      font-size: 0.85rem;
-      color: #ddd;
-      max-width: 420px;
-      margin: 0 auto 22px;
+    .disclosure {
+      color: var(--muted);
+      font-size: 0.74rem;
+      max-width: 640px;
+      margin: 0 auto;
+      line-height: 1.55;
     }
   </style>
 </head>
 <body>
 
-  <div class="disclosure">
-    Disclosure: As an Amazon Associate and affiliate partner, I earn from qualifying purchases.
-  </div>
+  <header>
+    <!-- YOUR EXACT UPLOADED LOGO ("Online Shop - The Style Drop") -->
+    <div class="logo-banner">
+      <svg class="logo-svg" viewBox="0 0 520 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Online Shop The Style Drop">
+        <!-- Pink Shopping Bag (Tilted Left) -->
+        <g transform="translate(32, 18) rotate(-9, 75, 80)">
+          <!-- Bag Handle -->
+          <path d="M 48 42 C 48 5, 102 5, 102 42" fill="none" stroke="#f01267" stroke-width="11" stroke-linecap="round" />
+          <!-- Bag Body -->
+          <path d="M 22 40 L 128 40 L 142 152 L 8 152 Z" fill="#f01267" stroke="#f01267" stroke-width="6" stroke-linejoin="round" />
+          <!-- Bag Holes -->
+          <circle cx="48" cy="55" r="4.5" fill="#ffffff" />
+          <circle cx="102" cy="55" r="4.5" fill="#ffffff" />
+        </g>
 
-  <!-- 1. CANVA HERO SECTION -->
-  <section class="hero">
-    <div>
-      <div class="brand-logo">The Style Drop</div>
-      <div class="eyebrow">IT'S ALL HERE</div>
-      <h1>Shop at your<br>own pace</h1>
-      <p>Get the best curated fashion, tech, and viral reel finds all in one place.</p>
-      <a href="#shop" class="pill-btn">Shop Now</a>
-    </div>
-    <div class="butterfly-wrap">
-      <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80" alt="The Style Drop Fashion" class="butterfly-img" />
-      <svg class="sparkle" viewBox="0 0 24 24"><path d="M12 0L14.59 8.41L23 11L14.59 13.59L12 22L9.41 13.59L1 11L9.41 8.41L12 0Z"/></svg>
-    </div>
-  </section>
+        <!-- White Shopping Bag (Tilted Right in Front) -->
+        <g transform="translate(68, 66) rotate(14, 55, 55)">
+          <!-- White Handle -->
+          <path d="M 32 32 C 32 4, 76 4, 76 32" fill="none" stroke="#ffffff" stroke-width="8.5" stroke-linecap="round" />
+          <!-- White Body -->
+          <path d="M 14 30 L 94 30 L 104 108 L 4 108 Z" fill="#ffffff" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" />
+          <!-- Pink Holes -->
+          <circle cx="33" cy="42" r="3.5" fill="#f01267" />
+          <circle cx="75" cy="42" r="3.5" fill="#f01267" />
+        </g>
 
-  <!-- 2. SHOPPING SIMPLIFIED BANNER -->
-  <section class="sky-banner">
-    <div class="sky-inner">
-      <h2>Shopping simplified</h2>
-      <div class="sky-box">
-        <p>At The Style Drop, there's something for everyone. Search any item number (#01, #02) from our reels and shop directly from trusted stores.</p>
-        <a href="#shop" class="pill-btn">Explore Picks</a>
-      </div>
-    </div>
-  </section>
+        <!-- Cutout Mask Effect for Text Overlap -->
+        <path d="M 115 120 L 200 120 L 200 175 L 115 175 Z" fill="#f6e3e4" opacity="0.85" />
 
-  <!-- 3. YOUR LIVE GOOGLE SHEET PRODUCTS & SOCIALS -->
-  <section class="shop-section" id="shop">
-    <div class="section-head">
-      <h2>Latest Reels Finds</h2>
-      <p>Search by item number (#01) or keyword below</p>
+        <!-- "Online Shop" Text -->
+        <text x="235" y="108" font-family="'Plus Jakarta Sans', sans-serif" font-size="21" font-weight="500" fill="#000000" letter-spacing="3.5">Online Shop</text>
+
+        <!-- "The Style Drop" Brush Text -->
+        <text x="140" y="158" font-family="'Caveat Brush', cursive, sans-serif" font-size="64" font-weight="700" fill="#000000" letter-spacing="1">The Style Drop</text>
+      </svg>
     </div>
 
-    <!-- 7 Official Social Media Links -->
+    <p class="subtitle">Click any product to shop directly • Search by #number or item name</p>
+
+    <!-- 7 OFFICIAL SOCIAL LINKS -->
     <div class="social-links">
       <a href="https://www.instagram.com/thestyledrop7" target="_blank" rel="noopener" class="social-btn insta">
         <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
@@ -398,68 +400,57 @@
       </a>
     </div>
 
+    <!-- SEARCH & MEN / WOMEN FASHION FILTERS -->
     <div class="controls">
-      <input type="text" id="searchInput" class="search-box" placeholder="Search #number or product name..." />
+      <div class="search-wrap">
+        <input type="text" id="searchInput" class="search-box" placeholder="Search #number or item (Pant, T-shirt, Jacket...)" />
+      </div>
       <div class="filters" id="filterContainer">
-        <button class="filter-btn active" data-category="all">All Drops</button>
-        <button class="filter-btn" data-category="fashion">Fashion</button>
+        <button class="filter-btn active" data-category="all">All</button>
+        <button class="filter-btn" data-category="men">Men</button>
+        <button class="filter-btn" data-category="women">Women</button>
+        <button class="filter-btn" data-category="fashion">All Fashion</button>
         <button class="filter-btn" data-category="tech">Tech & Desk</button>
         <button class="filter-btn" data-category="essentials">Essentials</button>
       </div>
     </div>
+  </header>
 
-    <main class="grid" id="productGrid">
+  <main id="shopTop">
+    <!-- 6 PRODUCTS PER PAGE GRID -->
+    <div class="grid" id="productGrid">
       <p class="status">Loading products...</p>
-    </main>
-  </section>
+    </div>
 
-  <!-- 4. CANVA LILAC & ARCHES SECTION -->
-  <section class="editorial-split">
-    <div class="lilac-card">
-      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Items that fit your style" />
-      <h3>Items that fit your style</h3>
-      <p>Handpicked statement pieces, everyday essentials, and trending finds updated daily from our reels.</p>
-    </div>
-    <div class="arch-stack">
-      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80" alt="Style Arch 1" class="arch-img" />
-      <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=500&q=80" alt="Style Arch 2" class="arch-img pill-shape" />
-    </div>
-  </section>
+    <!-- PAGE NUMBERS (1, 2, 3...) -->
+    <div class="pagination" id="paginationContainer"></div>
+  </main>
 
-  <!-- 5. FEATURED COLLECTION CARDS (Canva Bottom Cards) -->
-  <section class="featured-stories">
-    <div class="story-card">
-      <img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=600&q=80" alt="Trending Fashion" />
-      <a href="#shop" class="story-caption">
-        <span>Top viral fashion picks of the week</span>
-        <span>Shop →</span>
-      </a>
-    </div>
-    <div class="story-card">
-      <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80" alt="Gadgets & Essentials" />
-      <a href="#shop" class="story-caption coral">
-        <span>Must-have gadgets & daily essentials</span>
-        <span>Shop →</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- 6. FOOTER BANNER -->
-  <footer class="footer-banner">
-    <div class="brand-logo">The Style Drop</div>
-    <h2>Follow for the latest<br>deals & drops!</h2>
-    <p>Never miss a viral reel product. Connect with us across all social platforms above.</p>
-    <a href="https://www.instagram.com/thestyledrop7" target="_blank" rel="noopener" class="pill-btn coral">Follow on Instagram</a>
+  <!-- FOOTER WITH AFFILIATE DISCLOSURE AT THE BOTTOM -->
+  <footer>
+    <div class="footer-brand">The Style Drop • Online Shop</div>
+    <p class="disclosure">
+      Disclosure: As an Amazon Associate and affiliate partner for various e-commerce stores, I earn from qualifying purchases at no extra cost to you.
+    </p>
   </footer>
 
   <script>
     const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/" + "15xy8uLalVPQw07WEUPB3tO2oWqydjk7rKrvogjTSkx8" + "/export?format=csv";
 
+    const ITEMS_PER_PAGE = 6; // Strictly 6 products per page
     let products = [];
     let activeCategory = "all";
+    let currentPage = 1;
+
     const grid = document.getElementById("productGrid");
+    const paginationContainer = document.getElementById("paginationContainer");
     const searchInput = document.getElementById("searchInput");
     const filterBtns = document.querySelectorAll(".filter-btn");
+
+    // Normalize text so "tshirt" matches "T-Shirt" or "t shirt"
+    function normalizeText(str) {
+      return (str || "").toLowerCase().replace(/[-\s]+/g, "");
+    }
 
     Papa.parse(SHEET_CSV_URL, {
       download: true,
@@ -474,49 +465,133 @@
       }
     });
 
-    function renderProducts() {
-      const query = searchInput.value.toLowerCase();
-      grid.innerHTML = "";
+    function getFilteredProducts() {
+      const rawQuery = searchInput.value.toLowerCase().trim();
+      const normQuery = normalizeText(rawQuery);
 
-      const filtered = products.filter(p => {
+      return products.filter(p => {
         if (!p.title) return false;
+
         const cat = (p.category || "").toLowerCase().trim();
-        const matchesCat = activeCategory === "all" || cat === activeCategory;
-        const matchesSearch =
-          (p.title || "").toLowerCase().includes(query) ||
-          (p.id || "").toLowerCase().includes(query) ||
-          (p.desc || "").toLowerCase().includes(query);
-        return matchesCat && matchesSearch;
+        const title = (p.title || "").toLowerCase();
+        const desc = (p.desc || "").toLowerCase();
+        const id = (p.id || "").toLowerCase();
+
+        // Category Matching (Men, Women, Fashion, Tech, Essentials)
+        let matchesCat = false;
+        if (activeCategory === "all") {
+          matchesCat = true;
+        } else if (activeCategory === "men") {
+          matchesCat = cat === "men" || cat === "men fashion" || cat === "mens";
+        } else if (activeCategory === "women") {
+          matchesCat = cat === "women" || cat === "women fashion" || cat === "womens";
+        } else if (activeCategory === "fashion") {
+          matchesCat = cat.includes("fashion") || cat === "men" || cat === "women";
+        } else {
+          matchesCat = cat.includes(activeCategory);
+        }
+
+        // Smart Search Matching (#ID, Title, Description, Category, T-shirt/Pant/Jacket)
+        if (!rawQuery) return matchesCat;
+
+        const matchesRaw =
+          title.includes(rawQuery) ||
+          id.includes(rawQuery) ||
+          desc.includes(rawQuery) ||
+          cat.includes(rawQuery);
+
+        const matchesNormalized =
+          normalizeText(title).includes(normQuery) ||
+          normalizeText(desc).includes(normQuery) ||
+          normalizeText(id).includes(normQuery);
+
+        return matchesCat && (matchesRaw || matchesNormalized);
       });
+    }
+
+    function renderProducts() {
+      const filtered = getFilteredProducts();
+      grid.innerHTML = "";
+      paginationContainer.innerHTML = "";
 
       if (filtered.length === 0) {
-        grid.innerHTML = `<p class="status">No matching products found.</p>`;
+        grid.innerHTML = `<p class="status">No matching products found. Try searching another keyword or #number.</p>`;
         return;
       }
 
-      filtered.forEach(p => {
+      const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+      if (currentPage > totalPages) currentPage = 1;
+
+      const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+      const pageItems = filtered.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+      // Render 6 Direct-Click Cards
+      pageItems.forEach(p => {
+        const cleanLink = (p.link || "#").trim();
+        const cleanCat = (p.category || "").trim();
         grid.innerHTML += `
-          <article class="card">
+          <a href="${cleanLink}" target="_blank" rel="sponsored nofollow noopener" class="card">
             <span class="badge">${p.id || ""}</span>
+            ${cleanCat ? `<span class="cat-tag">${cleanCat}</span>` : ""}
             <img src="${p.image || ""}" alt="${p.title}" class="card-img" loading="lazy" decoding="async" />
             <div class="card-body">
               <h2 class="card-title">${p.title}</h2>
               <p class="card-desc">${p.desc || ""}</p>
-              <a href="${p.link || "#"}" target="_blank" rel="sponsored nofollow noopener" class="cta-btn">
-                Check Price →
-              </a>
+              <span class="cta-btn">Shop Now →</span>
             </div>
-          </article>
+          </a>
         `;
       });
+
+      renderPagination(totalPages);
     }
 
-    searchInput.addEventListener("input", renderProducts);
+    function renderPagination(totalPages) {
+      if (totalPages <= 1) return; // Only 1 page -> no buttons needed, or show Page 1
+
+      // Prev Button
+      const prevBtn = document.createElement("button");
+      prevBtn.className = "page-btn";
+      prevBtn.innerText = "‹ Prev";
+      prevBtn.disabled = currentPage === 1;
+      prevBtn.onclick = () => goToPage(currentPage - 1);
+      paginationContainer.appendChild(prevBtn);
+
+      // Page Numbers (1, 2, 3, 4...)
+      for (let i = 1; i <= totalPages; i++) {
+        const pageBtn = document.createElement("button");
+        pageBtn.className = "page-btn" + (i === currentPage ? " active" : "");
+        pageBtn.innerText = i;
+        pageBtn.onclick = () => goToPage(i);
+        paginationContainer.appendChild(pageBtn);
+      }
+
+      // Next Button
+      const nextBtn = document.createElement("button");
+      nextBtn.className = "page-btn";
+      nextBtn.innerText = "Next ›";
+      nextBtn.disabled = currentPage === totalPages;
+      nextBtn.onclick = () => goToPage(currentPage + 1);
+      paginationContainer.appendChild(nextBtn);
+    }
+
+    function goToPage(pageNum) {
+      currentPage = pageNum;
+      renderProducts();
+      document.getElementById("shopTop").scrollIntoView({ behavior: "smooth" });
+    }
+
+    searchInput.addEventListener("input", () => {
+      currentPage = 1;
+      renderProducts();
+    });
+
     filterBtns.forEach(btn => {
       btn.addEventListener("click", () => {
         filterBtns.forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
         activeCategory = btn.dataset.category;
+        currentPage = 1;
         renderProducts();
       });
     });
