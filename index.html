@@ -10,7 +10,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <style>
-    /* EXACT SOFT BLUSH PINK THEME (MATCHES YOUR LOGO BACKGROUND SEAMLESSLY) */
     :root, [data-theme="light"] {
       --bg: #f6e3e4;
       --card-bg: #fdfaf6;
@@ -26,7 +25,6 @@
       --sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     }
 
-    /* DARK MODE THEME */
     [data-theme="dark"] {
       --bg: #0f0c0e;
       --card-bg: #1a1518;
@@ -52,7 +50,6 @@
       transition: background-color 0.25s ease, color 0.25s ease;
     }
 
-    /* TOP HEADER WITH SEAMLESS LOGO & DARK MODE BUTTON */
     header {
       max-width: 960px;
       width: 100%;
@@ -86,7 +83,6 @@
     }
     .theme-toggle:hover { border-color: var(--pink); }
 
-    /* SEAMLESS LOGO CONTAINER (NO BOX BORDER) */
     .logo-container {
       max-width: 230px;
       margin: 0 auto 10px;
@@ -98,7 +94,6 @@
       border-radius: 16px;
     }
 
-    /* SMART SEARCH BAR & CATEGORY FILTERS */
     .controls {
       display: flex;
       flex-direction: column;
@@ -158,7 +153,6 @@
       font-weight: 700;
     }
 
-    /* PRODUCT GRID (6 PRODUCTS PER PAGE) */
     main {
       max-width: 960px;
       width: 100%;
@@ -260,7 +254,6 @@
       font-size: 0.92rem;
     }
 
-    /* PAGINATION (< Prev 1 2 3 Next >) */
     .pagination {
       display: flex;
       justify-content: center;
@@ -296,7 +289,6 @@
       cursor: not-allowed;
     }
 
-    /* FOOTER: CIRCULAR SOCIAL ICONS & DISCLOSURE AT THE BOTTOM */
     footer {
       margin-top: 24px;
       padding: 20px 16px 32px;
@@ -340,19 +332,16 @@
 <body>
 
   <header>
-    <!-- 1. DARK / LIGHT MODE TOGGLE IN TOP RIGHT -->
     <div class="top-bar">
       <button id="themeToggle" class="theme-toggle" aria-label="Toggle Theme">
         🌙 Dark Mode
       </button>
     </div>
 
-    <!-- 2. YOUR UPLOADED LOGO.PNG -->
     <div class="logo-container">
       <img src="logo.png" alt="Online Shop - The Style Drop" class="logo-img" />
     </div>
 
-    <!-- 3. SEARCH BAR & 4. MEN / WOMEN FILTERS -->
     <div class="controls">
       <div class="search-wrap">
         <input type="text" id="searchInput" class="search-box" placeholder="🔍 Search items, styles, #number (Pant, T-shirt, Jacket...)" />
@@ -368,16 +357,12 @@
   </header>
 
   <main id="shopTop">
-    <!-- 5. 6 PRODUCTS PER PAGE GRID -->
     <div class="grid" id="productGrid">
       <p class="status">Loading products...</p>
     </div>
-
-    <!-- 6. PAGINATION (< Prev 1 2 3 Next >) -->
     <div class="pagination" id="paginationContainer"></div>
   </main>
 
-  <!-- 7. ROUND SOCIAL ICONS & 8. DISCLOSURE AT THE VERY BOTTOM -->
   <footer>
     <div class="social-links">
       <a href="https://www.instagram.com/thestyledrop7" target="_blank" rel="noopener" class="social-btn" aria-label="Instagram">
@@ -446,11 +431,15 @@
       header: true,
       skipEmptyLines: true,
       complete: function(results) {
-        products = results.data.reverse();
-        renderProducts();
+        if (results.data && results.data.length > 0) {
+          products = results.data.reverse();
+          renderProducts();
+        } else {
+          grid.innerHTML = `<p class="status">No products found in the Google Sheet.</p>`;
+        }
       },
-      error: function() {
-        grid.innerHTML = `<p class="status">Make sure your Google Sheet access is set to 'Anyone with the link'.</p>`;
+      error: function(err) {
+        grid.innerHTML = `<p class="status">Error loading sheet. Check sharing permissions.</p>`;
       }
     });
 
@@ -500,7 +489,7 @@
       paginationContainer.innerHTML = "";
 
       if (filtered.length === 0) {
-        grid.innerHTML = `<p class="status">No matching products found. Try searching another keyword or #number.</p>`;
+        grid.innerHTML = `<p class="status">No matching products found.</p>`;
         return;
       }
 
@@ -508,4 +497,72 @@
       if (currentPage > totalPages) currentPage = 1;
 
       const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-      const pageItem
+      const pageItems = filtered.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+      pageItems.forEach(p => {
+        const cleanLink = (p.link || "#").trim();
+        grid.innerHTML += `
+          <a href="${cleanLink}" target="_blank" rel="sponsored nofollow noopener" class="card">
+            <span class="badge">${p.id || ""}</span>
+            <img src="${p.image || ""}" alt="${p.title}" class="card-img" loading="lazy" decoding="async" />
+            <div class="card-body">
+              <h2 class="card-title">${p.title}</h2>
+              <p class="card-desc">${p.desc || ""}</p>
+              <span class="cta-btn">Shop Now</span>
+            </div>
+          </a>
+        `;
+      });
+
+      renderPagination(totalPages);
+    }
+
+    function renderPagination(totalPages) {
+      if (totalPages <= 1) return;
+
+      const prevBtn = document.createElement("button");
+      prevBtn.className = "page-btn";
+      prevBtn.innerText = "‹ Prev";
+      prevBtn.disabled = currentPage === 1;
+      prevBtn.onclick = () => goToPage(currentPage - 1);
+      paginationContainer.appendChild(prevBtn);
+
+      for (let i = 1; i <= totalPages; i++) {
+        const pageBtn = document.createElement("button");
+        pageBtn.className = "page-btn" + (i === currentPage ? " active" : "");
+        pageBtn.innerText = i;
+        pageBtn.onclick = () => goToPage(i);
+        paginationContainer.appendChild(pageBtn);
+      }
+
+      const nextBtn = document.createElement("button");
+      nextBtn.className = "page-btn";
+      nextBtn.innerText = "Next ›";
+      nextBtn.disabled = currentPage === totalPages;
+      nextBtn.onclick = () => goToPage(currentPage + 1);
+      paginationContainer.appendChild(nextBtn);
+    }
+
+    function goToPage(pageNum) {
+      currentPage = pageNum;
+      renderProducts();
+      document.getElementById("shopTop").scrollIntoView({ behavior: "smooth" });
+    }
+
+    searchInput.addEventListener("input", () => {
+      currentPage = 1;
+      renderProducts();
+    });
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        filterBtns.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        activeCategory = btn.dataset.category;
+        currentPage = 1;
+        renderProducts();
+      });
+    });
+  </script>
+</body>
+</html>
